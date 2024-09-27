@@ -15,7 +15,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-public class UserEntity implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,7 @@ public class UserEntity implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
+    private String name;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

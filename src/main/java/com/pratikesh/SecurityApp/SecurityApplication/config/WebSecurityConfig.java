@@ -2,7 +2,9 @@ package com.pratikesh.SecurityApp.SecurityApplication.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +22,7 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/posts", "error").permitAll()
+                .requestMatchers("/posts", "/auth/**").permitAll()
                 .requestMatchers("/posts/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated())
                 .csrf(csrfConfig -> csrfConfig.disable())
@@ -30,6 +32,11 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+  /*  @Bean
     UserDetailsService myInMemoryUserDetails(){
         UserDetails normalUser = User
                 .withUsername("Pratikesh")
@@ -44,7 +51,7 @@ public class WebSecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(normalUser, adminUser);
-    }
+    }*/
 
     @Bean
     PasswordEncoder passwordEncoder(){

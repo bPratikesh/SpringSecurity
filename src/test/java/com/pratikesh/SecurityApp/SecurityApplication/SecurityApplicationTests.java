@@ -1,6 +1,6 @@
 package com.pratikesh.SecurityApp.SecurityApplication;
 
-import com.pratikesh.SecurityApp.SecurityApplication.entities.UserEntity;
+import com.pratikesh.SecurityApp.SecurityApplication.entities.User;
 import com.pratikesh.SecurityApp.SecurityApplication.service.JwtService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ class SecurityApplicationTests {
 	@Test
 	void contextLoads() {
 
-		UserEntity userEntity = new UserEntity(4L, "prat@gmail.com", "6721");
-		String token = jwtService.generateToken(userEntity);
+		User user = new User(4L, "prat@gmail.com", "6721");
+		String token = jwtService.generateToken(user);
 		System.out.println(token);
 
 		Long id = jwtService.getUserIdFromToken(token);

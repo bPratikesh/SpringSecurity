@@ -2,7 +2,7 @@ package com.pratikesh.SecurityApp.SecurityApplication.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import com.pratikesh.SecurityApp.SecurityApplication.entities.UserEntity;
+import com.pratikesh.SecurityApp.SecurityApplication.entities.User;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(UserEntity user){
+    public String generateToken(User user){
         return Jwts.builder()
                 .subject(user.getId().toString())
                 .claim("email", user.getEmail())
